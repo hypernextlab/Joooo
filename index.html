@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcard Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Flashcard Game</h1>
-        <div id="categoryButtons">
-            <button onclick="selectCategory('animals')">English</button>
-            <button onclick="selectCategory('fruits')">Chinese</button>
-            <button onclick="selectCategory('vehicles')">Maths</button>
-        </div>
+        <nav id="categoryButtons">
+            <button onclick="selectCategory('animals')">Animals</button>
+            <button onclick="selectCategory('fruits')">Fruits</button>
+            <button onclick="selectCategory('vehicles')">Vehicles</button>
+        </nav>
+        
+        <div id="remainingFlashcards" class="word"></div> <!-- Remaining flashcards counter -->
+        
         <div class="flashcard" id="flashcard">
+            <div id="currentFlashcardIndex" class="index"></div> <!-- Current flashcard number -->
             <img id="flashcardImage" src="" alt="Flashcard Image" onclick="playSoundAndSpeak()">
             <div id="wordContainer" class="word"></div>
         </div>
+        
+        <button id="previousFlashcardButton" onclick="previousFlashcard()">Previous</button> <!-- Previous button -->
         <button id="nextFlashcardButton" onclick="nextFlashcard()">Next</button>
+        
+        <!-- Learned Words Section -->
+        <div id="learnedWordsSection" class="learned-words" style="display: none;">
+            <h2>Learned Words</h2>
+            <ul id="learnedWordsList"></ul>
+            <button onclick="resetGame()">Play Again</button> <!-- Reset for another round -->
+        </div>
     </div>
+    
     <audio id="wordSound"></audio>
-    <script src="js/custom.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
