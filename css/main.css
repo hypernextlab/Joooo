@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff7f50, #ffdb58, #ff85b3, #6a9cff); /* Colorful gradient */
+  background-size: 400% 400%; /* Extra size for animation */
+  animation: gradient 15s ease infinite; /* Animation for the gradient */
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.flashcard {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.flashcard img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.word {
+  font-size: 2em;
+  margin-top: 10px;
+}
+
+#categoryButtons, #nextFlashcardButton, #resetButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#categoryButtons button,
+#nextFlashcardButton,
+#resetButton {
+  background-color: #4caf50; /* Green color for buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0 5px;
+}
+
+#categoryButtons button:hover,
+#nextFlashcardButton:hover,
+#resetButton:hover {
+  background-color: #388e3c; /* Darker green on hover */
+}

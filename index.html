@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Flashcard Game</h1>
+        <div id="categoryButtons">
+            <button onclick="selectCategory('animals')">English</button>
+            <button onclick="selectCategory('fruits')">Chinese</button>
+            <button onclick="selectCategory('vehicles')">Maths</button>
+        </div>
+        <div class="flashcard" id="flashcard">
+            <img id="flashcardImage" src="" alt="Flashcard Image" onclick="playSoundAndSpeak()">
+            <div id="wordContainer" class="word"></div>
+        </div>
+        <button id="nextFlashcardButton" onclick="nextFlashcard()">Next</button>
+    </div>
+    <audio id="wordSound"></audio>
+    <script src="js/custom.js"></script>
+</body>
+</html>
