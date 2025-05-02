@@ -1,53 +1,168 @@
 const flashcards = {
-    animals: [
-        { image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.7jK7hJ1jVQR43DKYWEsYKAHaHa%3Fpid%3DApi&f=1&ipt=ef27765ef341154796075caa50ff0c0f391afe43af0f90912a483d3aafab5867&ipo=images", word: "Wallet", sound: "sounds/Wallet.mp3" },
-        { image: "https://example.com/cat.jpg", word: "Cathay", sound: "sounds/cat.mp3" },
-        { image: "https://example.com/elephant.jpg", word: "Elephant", sound: "sounds/elephant.mp3" }
-    ],
-    fruits: [
-        { image: "https://example.com/apple.jpg", word: "Apple", sound: "sounds/apple.mp3" },
-        { image: "https://example.com/banana.jpg", word: "Banana", sound: "sounds/banana.mp3" },
-        { image: "https://example.com/orange.jpg", word: "Orange", sound: "sounds/orange.mp3" }
-    ],
-    vehicles: [
-        { image: "https://example.com/car.jpg", word: "Car", sound: "sounds/car.mp3" },
-        { image: "https://example.com/bicycle.jpg", word: "Bicycle", sound: "sounds/bicycle.mp3" },
-        { image: "https://example.com/bus.jpg", word: "Bus", sound: "sounds/bus.mp3" }
-    ]
+  animals: [
+    {
+      image:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.7jK7hJ1jVQR43DKYWEsYKAHaHa%3Fpid%3DApi&f=1",
+      word: "Wallet",
+      sound: "sounds/Wallet.mp3"
+    },
+    {
+      image: "https://example.com/cat.jpg",
+      word: "Cat",
+      sound: "sounds/cat.mp3"
+    },
+    {
+      image: "https://example.com/elephant.jpg",
+      word: "Elephant",
+      sound: "sounds/elephant.mp3"
+    }
+  ],
+  fruits: [
+    {
+      image: "https://example.com/apple.jpg",
+      word: "Apple",
+      sound: "sounds/apple.mp3"
+    },
+    {
+      image: "https://example.com/banana.jpg",
+      word: "Banana",
+      sound: "sounds/banana.mp3"
+    },
+    {
+      image: "https://example.com/orange.jpg",
+      word: "Orange",
+      sound: "sounds/orange.mp3"
+    }
+  ],
+  vehicles: [
+    {
+      image: "https://example.com/car.jpg",
+      word: "Car",
+      sound: "sounds/car.mp3"
+    },
+    {
+      image: "https://example.com/bicycle.jpg",
+      word: "Bicycle",
+      sound: "sounds/bicycle.mp3"
+    },
+    {
+      image: "https://example.com/bus.jpg",
+      word: "Bus",
+      sound: "sounds/bus.mp3"
+    }
+  ]
 };
 
 let currentFlashcardIndex = 0;
-let currentCategory = 'animals';
+let currentCategory = "animals";
+let learnedWords = []; // Array to hold learned words
 
 function selectCategory(category) {
-    currentCategory = category;
-    currentFlashcardIndex = 0; // Reset index
-    updateFlashcard();
+  currentCategory = category;
+  currentFlashcardIndex = 0; // Reset index
+  learnedWords = []; // Reset learned words for new category
+  updateFlashcard();
+  updateRemainingFlashcards();
+  updateButtonStates();
 }
 
 function playSoundAndSpeak() {
-    const sound = document.getElementById("wordSound");
-    sound.src = flashcards[currentCategory][currentFlashcardIndex].sound;
-    sound.play();
-
-    const wordToSpeak = flashcards[currentCategory][currentFlashcardIndex].word;
-    speakWord(wordToSpeak);
+  const sound = document.getElementById("wordSound");
+  sound.src = flashcards[currentCategory][currentFlashcardIndex].sound;
+  sound.play();
+  const wordToSpeak = flashcards[currentCategory][currentFlashcardIndex].word;
+  speakWord(wordToSpeak);
 }
 
 function speakWord(word) {
-    const utterance = new SpeechSynthesisUtterance(word);
-    speechSynthesis.speak(utterance);
+  const utterance = new SpeechSynthesisUtterance(word);
+  speechSynthesis.speak(utterance);
 }
 
 function nextFlashcard() {
-    currentFlashcardIndex = (currentFlashcardIndex + 1) % flashcards[currentCategory].length;
+  // Store the learned word if it's not already included
+  if (
+    !learnedWords.includes(
+      flashcards[currentCategory][currentFlashcardIndex].word
+    )
+  ) {
+    learnedWords.push(flashcards[currentCategory][currentFlashcardIndex].word);
+  }
+
+  // Move to the next flashcard
+  currentFlashcardIndex += 1;
+
+  // Check if we reached the end of the flashcards
+  if (currentFlashcardIndex >= flashcards[currentCategory].length) {
+    displayLearnedWords();
+  } else {
     updateFlashcard();
+    updateRemainingFlashcards();
+    updateButtonStates();
+  }
+}
+
+function previousFlashcard() {
+  // Move to the previous flashcard
+  if (currentFlashcardIndex > 0) {
+    currentFlashcardIndex -= 1;
+    updateFlashcard();
+    updateRemainingFlashcards();
+    updateButtonStates();
+  }
+}
+
+function resetGame() {
+  currentFlashcardIndex = 0; // Reset index
+  learnedWords = []; // Reset learned words
+  document.getElementById("learnedWordsSection").style.display = "none"; // Hide learned words section
+  document.getElementById("flashcard").style.display = "block"; // Show flashcards
+  updateFlashcard();
+  updateRemainingFlashcards();
+  updateButtonStates();
 }
 
 function updateFlashcard() {
-    document.getElementById("flashcardImage").src = flashcards[currentCategory][currentFlashcardIndex].image;
-    document.getElementById("wordContainer").textContent = flashcards[currentCategory][currentFlashcardIndex].word;
+  const currentIndexDisplay = document.getElementById("currentFlashcardIndex");
+  currentIndexDisplay.textContent = `${currentFlashcardIndex + 1} / ${
+    flashcards[currentCategory].length
+  }`; // Update the index display
+
+  document.getElementById("flashcardImage").src =
+    flashcards[currentCategory][currentFlashcardIndex].image;
+  document.getElementById("wordContainer").textContent =
+    flashcards[currentCategory][currentFlashcardIndex].word;
 }
 
-// Initialize the first flashcard
+function updateRemainingFlashcards() {
+  const remainingCount =
+    flashcards[currentCategory].length - currentFlashcardIndex - 1;
+  document.getElementById(
+    "remainingFlashcards"
+  ).textContent = `Remaining Flashcards: ${remainingCount}`;
+}
+
+function displayLearnedWords() {
+  document.getElementById("flashcard").style.display = "none"; // Hide flashcards
+  const learnedWordsList = document.getElementById("learnedWordsList");
+  learnedWordsList.innerHTML = ""; // Clear the existing list
+
+  learnedWords.forEach((word) => {
+    const li = document.createElement("li");
+    li.textContent = word; // Set the learned word
+    learnedWordsList.appendChild(li); // Add it to the list
+  });
+
+  document.getElementById("learnedWordsSection").style.display = "block"; // Show learned words section
+}
+
+// Update button states based on the current index
+function updateButtonStates() {
+  const previousButton = document.getElementById("previousFlashcardButton");
+  previousButton.disabled = currentFlashcardIndex === 0; // Disable if on the first card
+}
+
+// Initialize the first flashcard and the remaining count
 updateFlashcard();
+updateRemainingFlashcards();
+updateButtonStates();
