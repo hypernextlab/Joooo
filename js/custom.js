@@ -2,24 +2,24 @@ const flashcards = {
   animals: [
     {
       image:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.7jK7hJ1jVQR43DKYWEsYKAHaHa%3Fpid%3DApi&f=1",
+        "https://cdn-icons-png.flaticon.com/128/12734/12734110.png",
       word: "Wallet",
       sound: "sounds/Wallet.mp3"
     },
     {
-      image: "https://example.com/cat.jpg",
+      image: "https://cdn-icons-png.flaticon.com/128/14237/14237280.png",
       word: "Cat",
       sound: "sounds/cat.mp3"
     },
     {
-      image: "https://example.com/elephant.jpg",
+      image: "https://cdn-icons-png.flaticon.com/128/13156/13156239.png",
       word: "Elephant",
       sound: "sounds/elephant.mp3"
     }
   ],
   fruits: [
     {
-      image: "https://example.com/apple.jpg",
+      image: "https://cdn-icons-png.flaticon.com/128/4354/4354030.png",
       word: "Apple",
       sound: "sounds/apple.mp3"
     },
@@ -36,7 +36,7 @@ const flashcards = {
   ],
   vehicles: [
     {
-      image: "https://example.com/car.jpg",
+      image: "https://cdn-icons-png.flaticon.com/128/12724/12724160.png",
       word: "Car",
       sound: "sounds/car.mp3"
     },
