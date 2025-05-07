@@ -83,27 +83,10 @@ button:disabled {
     list-style: none;
     padding: 0;
 }
+
 .index {
     text-align: center; /* Center the text */
     font-size: 1.5em; /* Increase font size */
     margin-bottom: 10px; /* Add some space below */
     color: #333; /* Set color */
-}
-.flashcard {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.flashcard img {
-    width: 250px; /* Fixed width */
-    height: 250px; /* Fixed height */
-    object-fit: cover; /* Maintain aspect ratio, filling the space */
-    padding: 10px; /* Add some padding (optional) */
-    border-radius: 10px; /* Retain rounded corners */
-    border: 2px solid #ccc; /* Optional border for aesthetics */
-}
-
-.word {
-    font-size: 2em;
-    margin-top: 10px;
 }
