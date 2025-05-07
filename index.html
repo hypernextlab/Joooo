@@ -16,28 +16,29 @@
             <button onclick="selectCategory('fruits')">Test2</button>
             <button onclick="selectCategory('vehicles')">Test3</button>
         </nav>
-        
+
         <div id="remainingFlashcards" class="word"></div> <!-- Remaining flashcards counter -->
-        
+
         <div class="flashcard" id="flashcard">
             <div id="currentFlashcardIndex" class="index"></div> <!-- Current flashcard number -->
             <img id="flashcardImage" src="" alt="Flashcard Image" onclick="playSoundAndSpeak()">
             <div id="wordContainer" class="word"></div>
         </div>
-        
+
         <button id="previousFlashcardButton" onclick="previousFlashcard()">Previous</button> <!-- Previous button -->
         <button id="nextFlashcardButton" onclick="nextFlashcard()">Next</button>
-        
+
         <!-- Learned Words Section -->
         <div id="learnedWordsSection" class="learned-words" style="display: none;">
             <h2>Learned Words</h2>
             <ul id="learnedWordsList"></ul>
             <button onclick="resetGame()">Play Again</button> <!-- Reset for another round -->
         </div>
+        
+        <button id="resetButton" onclick="resetGame()">Reset Game</button> <!-- Reset button -->
     </div>
-    
+
     <audio id="wordSound"></audio>
     <script src="script.js"></script>
 </body>
-
 </html>
